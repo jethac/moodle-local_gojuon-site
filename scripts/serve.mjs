@@ -1,11 +1,17 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
+import { japanesePage } from './japanese.mjs';
 const root = resolve(import.meta.dirname, '../public');
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.txt': 'text/plain', '.xml': 'application/xml' };
 createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (pathname === '/ja/' || pathname === '/ja') {
+      const html = japanesePage(await readFile(resolve(root, 'index.html'), 'utf8'));
+      res.writeHead(200, { 'Content-Type': mime['.html'] }).end(html);
+      return;
+    }
     const file = resolve(root, `.${pathname === '/' ? '/index.html' : pathname}`);
     if (!file.startsWith(root + sep)) { res.writeHead(403).end(); return; }
     const data = await readFile(file);

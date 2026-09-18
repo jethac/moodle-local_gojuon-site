@@ -1,4 +1,8 @@
 import { rows, filterParticipants } from './filter.js';
+import { messages, resultSummary } from './locale.js';
+
+const language = document.documentElement.lang === 'ja' ? 'ja' : 'en';
+const copy = messages[language];
 
 const people = [
   ['青木 葵', 'Aoki Aoi', 'あおき', 'あおい'],
@@ -20,7 +24,7 @@ const people = [
 ].map(([name, roman, surnameReading, givenReading]) => ({ name, roman, surnameReading, givenReading }));
 
 const state = { surname: 'all', given: 'all' };
-const labels = { all: 'All', other: 'Other', ...Object.fromEntries(rows.map(([key, label]) => [key, label])) };
+const labels = { all: copy.all, other: copy.other, ...Object.fromEntries(rows.map(([key, label]) => [key, label])) };
 for (const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') labels[`l${letter.toLowerCase()}`] = letter;
 const body = document.querySelector('#participants');
 
@@ -51,7 +55,7 @@ function render() {
     tr.append(cell);
     for (const reading of [person.surnameReading, person.givenReading]) {
       const td = document.createElement('td');
-      td.textContent = reading || 'Not recorded';
+      td.textContent = reading || copy.missing;
       if (!reading) td.className = 'missing';
       else td.lang = /^[A-Za-z]/.test(reading) ? 'en' : 'ja';
       tr.append(td);
@@ -59,7 +63,7 @@ function render() {
     const role = document.createElement('td');
     const badge = document.createElement('span');
     badge.className = 'role';
-    badge.textContent = 'Student';
+    badge.textContent = copy.student;
     role.append(badge);
     tr.append(role);
     body.append(tr);
@@ -69,18 +73,18 @@ function render() {
     const cell = document.createElement('td');
     cell.colSpan = 4;
     cell.className = 'empty';
-    cell.textContent = 'No sample participants match this combination. Try another row or reset the filters.';
+    cell.textContent = copy.empty;
     row.append(cell);
     body.append(row);
   }
   const active = [];
-  if (state.surname !== 'all') active.push(`surname ${labels[state.surname]}`);
-  if (state.given !== 'all') active.push(`given name ${labels[state.given]}`);
-  document.querySelector('#result-count').textContent = `${filtered.length} of ${people.length} participants${active.length ? ` · ${active.join(' + ')}` : ' · All names'}`;
+  if (state.surname !== 'all') active.push(`${copy.surname}: ${labels[state.surname]}`);
+  if (state.given !== 'all') active.push(`${copy.given}: ${labels[state.given]}`);
+  document.querySelector('#result-count').textContent = resultSummary(language, filtered.length, people.length, active);
 }
 
 for (const axis of ['surname', 'given']) {
-  const options = [['all', 'All'], ...rows.map(([key, label]) => [key, label]), ['other', '他']];
+  const options = [['all', copy.all], ...rows.map(([key, label]) => [key, label]), ['other', '他']];
   const latin = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map(letter => [`l${letter.toLowerCase()}`, letter]);
   for (const [container, entries] of [[`${axis}-filters`, options], [`${axis}-latin`, latin]]) {
     for (const [key, label] of entries) {
@@ -89,7 +93,7 @@ for (const axis of ['surname', 'given']) {
       button.className = 'chip';
       button.dataset.axis = axis;
       button.dataset.key = key;
-      button.setAttribute('aria-label', `${axis === 'surname' ? 'Surname' : 'Given name'}: ${key === 'other' ? 'Other or missing reading' : label}`);
+      button.setAttribute('aria-label', `${axis === 'surname' ? copy.surname : copy.given}: ${key === 'other' ? copy.otherLabel : label}`);
       const text = document.createElement('span');
       if (key === 'other' || rows.some(([row]) => row === key)) text.lang = 'ja';
       text.textContent = label;

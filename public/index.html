@@ -6,6 +6,10 @@
   <title>Gojūon — Japanese participant navigation for Moodle</title>
   <meta name="description" content="Find Moodle participants by their Japanese name readings. A familiar gojūon index, separate surname and given-name filters, and no core changes. Try the interactive demo.">
   <link rel="canonical" href="https://moodle-gojuon.jethachan.net/">
+  <link rel="alternate" hreflang="en" href="https://moodle-gojuon.jethachan.net/">
+  <link rel="alternate" hreflang="ja" href="https://moodle-gojuon.jethachan.net/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://moodle-gojuon.jethachan.net/">
+  <meta property="og:locale" content="en_US">
   <meta name="theme-color" content="#103f49">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://moodle-gojuon.jethachan.net/">
@@ -19,13 +23,14 @@
   <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="/styles.css">
   <script type="module" src="/demo.js"></script>
+  <script type="module" src="/language.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="hero">
     <nav class="wrap nav" aria-label="Main navigation">
       <a class="brand" href="#" aria-label="Gojūon home"><img src="/assets/logo.png" width="42" height="42" alt=""><span>Gojūon<span class="brand-jp" lang="ja">五十音</span></span></a>
-      <div class="nav-links"><a href="#demo">Try it</a><a href="#install">Install</a><a href="https://github.com/jethac/moodle-local_gojuon">GitHub <span aria-hidden="true">↗</span></a></div>
+      <div class="nav-links"><a href="#demo">Try it</a><a href="#install">Install</a><a href="https://github.com/jethac/moodle-local_gojuon">GitHub <span aria-hidden="true">↗</span></a><span class="language-switch" role="group" aria-label="Language"><a href="/?lang=en" lang="en" hreflang="en" data-language="en" aria-current="page">EN</a><a href="/ja/" lang="ja" hreflang="ja" data-language="ja">日本語</a></span></div>
     </nav>
     <div class="wrap hero-grid">
       <div>

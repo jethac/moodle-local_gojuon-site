@@ -22,6 +22,10 @@ Pushes to `main` run the filter tests, build the site, and deploy to the Cloudfl
 
 ## Content
 
+The header switches between English (`/`) and Japanese (`/ja/`). The Japanese page is generated at build time, so translated content and navigation work without JavaScript. With JavaScript enabled, the site remembers the choice locally and uses the browser's primary language on a first visit. `/?lang=en` explicitly selects English. No preference data is sent to a server.
+
+`scripts/japanese.mjs` contains Japanese page translations and fails the build if an English source fragment changes without updating its translation. `public/locale.js` provides localized demo messages and language selection logic. Existing screenshots and social artwork are shared between languages.
+
 - `public/index.html`: landing page, installation instructions, metadata.
 - `public/styles.css`: responsive presentation.
 - `public/demo.js`: fictional roster and accessible demo controls.
