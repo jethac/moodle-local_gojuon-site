@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gojūon — Japanese participant navigation for Moodle</title>
+  <meta name="description" content="Find Moodle participants by their Japanese name readings. A familiar gojūon index, separate surname and given-name filters, and no core changes. Try the interactive demo.">
+  <link rel="canonical" href="https://moodle-gojuon.jethachan.net/">
+  <meta name="theme-color" content="#103f49">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://moodle-gojuon.jethachan.net/">
+  <meta property="og:title" content="Gojūon — Japanese participant navigation for Moodle">
+  <meta property="og:description" content="Find participants by their Japanese names. A small Moodle plugin that makes a familiar task feel familiar again.">
+  <meta property="og:image" content="https://moodle-gojuon.jethachan.net/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gojūon — Japanese participant navigation for Moodle">
+  <meta name="twitter:description" content="Find participants by their Japanese names. Try the kana index demo.">
+  <meta name="twitter:image" content="https://moodle-gojuon.jethachan.net/og.png">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/demo.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="hero">
+    <nav class="wrap nav" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Gojūon home"><img src="/assets/logo.png" width="42" height="42" alt=""><span>Gojūon<span class="brand-jp" lang="ja">五十音</span></span></a>
+      <div class="nav-links"><a href="#demo">Try it</a><a href="#install">Install</a><a href="https://github.com/jethac/moodle-local_gojuon">GitHub <span aria-hidden="true">↗</span></a></div>
+    </nav>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">A small plugin for a more familiar Moodle</p>
+        <h1>Japanese names.<br>A Japanese index.</h1>
+        <p class="lede">Find the person you’re looking for, by the way their name is read. Gojūon brings familiar kana navigation to your course participants page.</p>
+        <div class="actions"><a class="button coral" href="#demo">Try the kana index <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/jethac/moodle-local_gojuon/releases/latest">Download the plugin <span aria-hidden="true">↗</span></a></div>
+        <p class="hero-note">Moodle 4.5+ <span>·</span> Free &amp; open source <span>·</span> No core changes</p>
+      </div>
+      <div class="hero-art"><img src="/assets/logo.png" width="1254" height="1254" alt="Gojūon: an あ index card with a participant tab" fetchpriority="high"><p><span lang="ja">あ か さ た な は ま や ら わ</span><span class="art-caption">The right starting point.</span></p></div>
+    </div>
+  </header>
+  <main id="main">
+    <article class="story wrap">
+      <div class="section-label"><span class="number">01 / THE PROBLEM</span><h2>You know the name.<br>The index should too.</h2></div>
+      <div class="story-copy"><p>Moodle’s usual A–Z participant index looks at the written name. For a class full of names like <span lang="ja">佐藤</span>, <span lang="ja">鈴木</span>, and <span lang="ja">高橋</span>, Latin initials aren’t much help.</p><p>The readings are already there in Moodle’s phonetic name fields. Gojūon puts them to work: choose <strong lang="ja">さ</strong> to find <strong lang="ja">佐藤（さとう）</strong>, or <strong lang="ja">た</strong> to find <strong lang="ja">高橋（たかはし）</strong>.</p><blockquote>A familiar index. The participant list you already use.</blockquote></div>
+    </article>
+
+    <section class="demo-section" id="demo" aria-labelledby="demo-title">
+      <div class="wrap">
+        <div class="section-head"><div><p class="number">02 / TRY IT YOURSELF</p><h2 id="demo-title">Start with <span lang="ja">か</span>. Find Katō.</h2><p>Choose a surname row, then narrow it down by given name.</p></div><span class="demo-badge">Interactive illustration</span></div>
+        <div class="demo-window">
+          <div class="demo-toolbar"><div><span class="course-icon" aria-hidden="true">あ</span><div><span class="course-label">SAMPLE COURSE</span><h3>Participants <span lang="ja">/ 参加者</span></h3></div></div><button id="reset" class="reset" type="button">Reset filters <span aria-hidden="true">↺</span></button></div>
+          <div class="filter-area">
+            <fieldset><legend><span lang="ja">姓</span> Surname</legend><div id="surname-filters" class="chips"></div><details><summary>Latin initials A–Z</summary><div id="surname-latin" class="chips latin"></div></details></fieldset>
+            <fieldset><legend><span lang="ja">名</span> Given name</legend><div id="given-filters" class="chips"></div><details><summary>Latin initials A–Z</summary><div id="given-latin" class="chips latin"></div></details></fieldset>
+          </div>
+          <div class="results-head"><p id="result-count" role="status" aria-live="polite" aria-atomic="true"></p><span>Fictional course roster</span></div>
+          <div class="table-scroll"><table><caption class="sr-only">Fictional participants matching the selected kana rows</caption><thead><tr><th scope="col">Participant</th><th scope="col">Surname reading</th><th scope="col">Given-name reading</th><th scope="col">Role</th></tr></thead><tbody id="participants"></tbody></table></div>
+          <noscript><p class="no-script">Enable JavaScript to try the filters. The screenshots below show the plugin running in Moodle.</p></noscript>
+          <div class="demo-foot"><span class="status-dot" aria-hidden="true"></span>Sample data only. This illustration runs entirely in your browser.</div>
+        </div>
+        <p class="demo-context">Try <strong lang="ja">か</strong> for Katō and Gotō, <strong lang="ja">さ</strong> for hiragana and half-width katakana, or <strong lang="ja">他</strong> for a missing reading. This is a simplified demonstration, not a live Moodle instance.</p>
+      </div>
+    </section>
+
+    <section class="wrap details-section" aria-labelledby="details-title">
+      <div class="section-head"><div><p class="number">03 / A SMALL, CONSIDERED ADDITION</p><h2 id="details-title">Fits the way your course works.</h2></div></div>
+      <div class="features">
+        <article><span class="feature-mark" lang="ja">あ / ア</span><h3>Readings, not guesswork</h3><p>Hiragana, katakana, half-width kana, and voiced variants belong to their familiar gojūon rows. Latin initials are available for romaji readings too.</p></article>
+        <article><span class="feature-mark" lang="ja">姓 + 名</span><h3>Two ways to narrow it down</h3><p>Filter surname and given name independently. Both work alongside Moodle’s existing participant filters, sorting, and pagination.</p></article>
+        <article><span class="feature-mark" lang="ja">他</span><h3>Everyone has a place</h3><p>Missing or unclassified readings stay accessible under Other. Reading-based filters appear only when the viewer is permitted to see those fields.</p></article>
+      </div>
+    </section>
+
+    <section class="screenshots-section" aria-labelledby="screenshots-title"><div class="wrap">
+      <div class="section-head"><div><p class="number">04 / INSIDE MOODLE</p><h2 id="screenshots-title">The real thing.</h2><p>Actual plugin screenshots. Select an image to view it full size.</p></div></div>
+      <div class="screenshots"><figure><a href="/assets/participants-bars.png"><img src="/assets/participants-bars.png" alt="Moodle participants page with separate surname and given-name kana filter bars" loading="lazy" width="1440" height="1000"></a><figcaption><strong>Familiar navigation</strong><span>Both kana index bars, right above the participant list.</span></figcaption></figure><figure><a href="/assets/participants-filter-ka.png"><img src="/assets/participants-filter-ka.png" alt="Moodle participant list filtered using the か surname row" loading="lazy" width="1440" height="1000"></a><figcaption><strong>One row, the right people</strong><span>The surname list narrowed down to the か row.</span></figcaption></figure></div>
+    </div></section>
+
+    <section class="wrap install-section" id="install" aria-labelledby="install-title">
+      <div><p class="number">05 / MAKE YOURSELF AT HOME</p><h2 id="install-title">A better index.<br>A simple install.</h2><p>A local plugin for Moodle 4.5 and later.<br>No changes to Moodle core.</p><a class="button teal" href="https://github.com/jethac/moodle-local_gojuon/releases/latest">Get the latest release <span aria-hidden="true">↗</span></a><p class="install-meta">GNU GPL v3 or later · PHP 8.3+</p></div>
+      <ol class="steps"><li><h3>Download the release ZIP</h3><p>Choose the packaged plugin ZIP attached to the GitHub release.</p></li><li><h3>Install in Moodle</h3><p>Go to <strong>Site administration → Plugins → Install plugins</strong>, upload the ZIP, and complete the upgrade.</p></li><li><h3>Set up your name readings</h3><p>Populate participants’ phonetic name fields and include them in the applicable Moodle name display format. Gojūon respects their visibility.</p><p>You can hide the original A–Z bars in the plugin settings. <a href="https://github.com/jethac/moodle-local_gojuon#readme">Read the documentation ↗</a></p></li></ol>
+    </section>
+    <section class="closing"><div class="wrap"><p lang="ja">名前の読み方から、見つけよう。</p><span>Find them by the way their name is read.</span></div></section>
+  </main>
+  <footer class="wrap footer"><div><a class="footer-brand" href="#">Gojūon <span lang="ja">五十音</span></a><p>Made by <a href="https://jethachan.net">Jetha Chan</a>. An independent, open-source Moodle plugin.</p></div><nav aria-label="Footer"><a href="https://github.com/jethac/moodle-local_gojuon">Source</a><a href="https://github.com/jethac/moodle-local_gojuon/issues">Report an issue</a><a href="https://github.com/jethac/moodle-local_gojuon/blob/main/COPYING.txt">Licence</a></nav></footer>
+</body>
+</html>
